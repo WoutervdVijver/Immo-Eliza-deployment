@@ -1,59 +1,37 @@
-from flask import Flask, request, jsonify
+from flask import Flask, redirect, request, render_template, url_for, jsonify
 import joblib
-from markupsafe import escape
 
 from model.model import ModelBuilder
-
-my_model = ModelBuilder(joblib.load('first_model'))
+from preprocessing.cleaning_data import preprocess
 
 app = Flask(__name__)
 
+my_model = ModelBuilder(joblib.load('first_model'))
 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def hello():
     return 'Welcome'
 
 
 
-
-@app.route('/predict', methods=['POST', 'GET'])
+@app.route('/predict', methods = ['POST', 'GET'])
 def predict():
     if request.method == 'POST':
-        return 'POST'
-    if request.method == 'GET':
-        return 'GET'
+        try:
+            data = request.form
+            data = preprocess(data)
+            prediction = my_model.predict(data)
+            return render_template('prediction.html', prediction = prediction)
+        except:
+            return 'Something went wrong'
+    else:
+        return render_template('predict.html')
 
-
-
-
-
-db_users = {
-    "John" : "Miami",
-    "David" : "Miami",
-    "Jane" : "London",
-    "Gabriella" : "Paris",
-    "Tanaka" : "Tokyo"
-}
-
-@app.route('/search', methods=['GET'])
-def search():
-    args = request.args
-    name = args.get('name')
-    location = args.get('location')
-
-    # result = db_users
-    if None not in (name, location):
-        result = {key: value for key, value in db_users.items() if key == name and value == location}
-    elif name is not None:
-        result = {key: value for key, value in db_users.items() if key == name}
-    elif location is not None:
-        result = {key: value for key, value in db_users.items() if value == location}
-
-    return result
-
-
+@app.route('/prediction')
+def prediction():
+    pass
 
 
 if __name__ == '__main__':
-   app.run(port=4000)
+   app.run(debug=True, port=4000)

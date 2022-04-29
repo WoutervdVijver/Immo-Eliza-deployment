@@ -1,7 +1,16 @@
 import pandas as pd
 
-def preprocess():
-    pass
+def preprocess(obj):
+    dict = {}
+    dict['Area'] = [clean_area(obj)]
+    return dict
+
+def clean_area(obj):
+    return int(obj['Area'])
+
+
+
+
 
 def csv_cleaner():
     df = pd.read_csv('/Users/wvdvijve/Documents/GitHub/becode-projects/Immo-Eliza-deployment/data/property_loft.csv')
