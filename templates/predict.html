@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'book_base.html' %}
 
-{% block head%}
+<!-- {% block head%}
 <title>Predict the price of your House</title>
-{% endblock %}
+{% endblock %} -->
 
 {% block body%}
-<div class = "content">
+<!-- <div class = "content">
     <h1 style="text-align: center">Fill in all the required fields</h1>
 
     
@@ -13,5 +13,150 @@
         <input type="text" name="Area" id="Area">
         <input type="submit" value="Submit">
     </form>
+</div> -->
+<div class="testbox">
+    <form action="/predict" method="POST">
+        <div class="banner">
+            <h1>Your house</h1>
+        </div>
+        <div class="item">
+            <p>Location</p>
+            <div class="name-item">
+              <input type="text" name="Location" placeholder="Location" />
+            </div>
+        </div>
+        <div class="item">
+            <p>Area</p>
+            <div class="name-item">
+              <input type="float" name="Living area" placeholder="Living area" />
+              <input type="float" name="Surface land area" placeholder="Land area" />
+            </div>
+        </div>
+        <div class="item">
+            <p>Type of House</p>
+            <select name="Property subtype" required>
+              <option value="APARTMENT_BLOCK">Apartment block</option>
+              <option value="BUNGALOW">Bungalow</option>
+              <option value="CASTLE">Castle</option>
+              <option value="CHALET">Chalet</option>
+              <option value="COUNTRY_COTTAGE">Country cottage</option>
+              <option value="EXCEPTIONAL_PROPERTY">Exceptional Property</option>
+              <option value="FARMHOUSE">Farmhouse</option>
+              <option selected value="HOUSE">House</option>
+              <option value="MANOR HOUSE">Manor house</option>
+              <option value="MIXED_USE_BUILDING">Mixed use building</option>
+              <option value="OTHER_PROPERTY">Other property</option>
+              <option value="TOWN_HOUSE">Town house</option>
+              <option value="VILLA">Villa</option>
+            </select>
+        </div>
+        <div class="item">
+            <p>Condition</p>
+            <select name="Condition" required>
+              <option value="AS_NEW">As new</option>
+              <option value="GOOD">Good</option>
+              <option value="JUST_RENOVATED">Just renovated</option>
+              <option value="TO_RENOVATE">To renovate</option>
+              <option value="=TO_RESTORE">To restore</option>
+              <option value="HYPER_EQUIPED">Hyper equipped</option>
+              <option value="UNKNOWN"> Unknown </option>
+            </select>
+        </div>
+        <div class="item">
+          <p>Number of bedrooms</p>
+          <div class="name-item">
+            <input type="int" name="Number of bedrooms" placeholder="Number of bedrooms" /> 
+          </div>
+        </div>
+        <div class="item">
+            <p>Type of Kitchen</p>
+            <select name="Kitchen" required>
+              <option value="INSTALLED">Installed</option>
+              <option value="NOT_INSTALLED">Not installed</option>
+              <option value="SEMI_EQUIPED">Semi-equiped</option>
+              <option value="USA_HYPER_EQUIPED">USA hyper-equiped</option>
+              <option value="USA_INSTALLED">USA installed</option>
+              <option value="USA_SEMI_INSTALLED">USA semi-installed</option>
+              <option value="USA_UNINSTALLED">USA uninstalled</option>
+              <option value="UNKNOWN"> Unknown </option>
+            </select>
+        </div>
+
+        <div class="question">
+            <p> Is there the house furnished?</p>
+            <div class="question-answer">
+              <div>
+                <input type="radio" value="1" id="radio_furnished_1" name="Furnished"/>
+                <label for="radio_furnished_1" class="radio"><span>Yes</span></label>
+              </div>
+            </div>
+            <div>
+                <input type="radio" value="0" id="radio_furnished_2" name="Furnished"/>
+                <label for="radio_furnished_2" class="radio"><span>No</span></label>
+              </div>
+        </div>
+
+        <div class="question">
+            <p> Is there a garden?</p>
+            <div class="question-answer">
+              <div>
+                <input type="radio" value="1" id="radio_garden_1" name="Garden"/>
+                <label for="radio_garden_1" class="radio"><span>Yes</span></label>
+              </div>
+            </div>
+            <div>
+                <input type="radio" value="0" id="radio_garden_2" name="Garden"/>
+                <label for="radio_garden_2" class="radio"><span>No</span></label>
+              </div>
+        </div>
+
+        <div class="question">
+            <p> Is there a Terrace?</p>
+            <div class="question-answer">
+              <div>
+                <input type="radio" value="1" id="radio_terrace_1" name="Terrace"/>
+                <label for="radio_terrace_1" class="radio"><span>Yes</span></label>
+              </div>
+            </div>
+            <div>
+                <input type="radio" value="0" id="radio_terrace_2" name="Terrace"/>
+                <label for="radio_terrace_2" class="radio"><span>No</span></label>
+              </div>
+        </div>
+
+        <div class="question">
+            <p> Is there a pool?</p>
+            <div class="question-answer">
+              <div>
+                <input type="radio" value="1" id="radio_pool_1" name="Pool"/>
+                <label for="radio_pool_1" class="radio"><span>Yes</span></label>
+              </div>
+            </div>
+            <div>
+                <input type="radio" value="0" id="radio_pool_2" name="Pool"/>
+                <label for="radio_pool_2" class="radio"><span>No</span></label>
+              </div>
+        </div>
+
+        <div class="question">
+        <p> Is there an open fireplace?</p>
+        <div class="question-answer">
+            <div>
+            <input type="radio" value="1" id="radio_fire_1" name="Open fireplace"/>
+            <label for="radio_fire_1" class="radio"><span>Yes</span></label>
+            </div>
+        </div>
+        <div>
+            <input type="radio" value="0" id="radio_2" name="Open fireplace"/>
+            <label for="radio_2" class="radio"><span>No</span></label>
+            </div>
+        </div>
+        
+        <div class="btn-block">
+          <button type="submit">Submit</button>
+        </div>
+    </form>
 </div>
+{% block prediction %}{% endblock %}
+
 {% endblock %}

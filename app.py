@@ -2,16 +2,24 @@ from flask import Flask, redirect, request, render_template, url_for, jsonify
 import joblib
 
 from model.model import ModelBuilder
-from preprocessing.cleaning_data import preprocess
+from preprocessing.cleaning_data import Preprocess
 
 app = Flask(__name__)
 
-my_model = ModelBuilder(joblib.load('first_model'))
+my_model = ModelBuilder(joblib.load('./model/best_model'))
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'GET':
+        return render_template('index.html')
+    else:
+        return redirect('/predict')
+    
+
+@app.route('/book')
 def hello():
-    return 'Welcome'
+    return render_template('book.html')
 
 
 
@@ -20,17 +28,31 @@ def predict():
     if request.method == 'POST':
         try:
             data = request.form
-            data = preprocess(data)
-            prediction = my_model.predict(data)
+            prepro = Preprocess(data)
+            prepro.clean_all()
+            prediction = my_model.predict(prepro.dict)
             return render_template('prediction.html', prediction = prediction)
         except:
-            return 'Something went wrong'
+            return render_template('predicterror.html')
     else:
         return render_template('predict.html')
 
-@app.route('/prediction')
+@app.route('/prediction', methods=['GET', 'POST'])
 def prediction():
-    pass
+    if request.method == 'GET':
+        return render_template('prediction.html', prediction=[7])
+    else:
+        if request.form['button'] == 'predict':
+            return redirect('/predict')
+        else:
+            return redirect('/')
+
+@app.route('/predicterror', methods=['GET', 'POST'])
+def error():
+    if request.method == 'GET':
+        return render_template('predicterror.html')
+    else:
+        return redirect('/predict')
 
 
 if __name__ == '__main__':

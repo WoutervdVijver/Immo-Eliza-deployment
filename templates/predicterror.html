@@ -1,0 +1,18 @@
+{% extends 'book_base.html' %}
+
+
+{% block body%}
+
+<div class="banner">
+    <h1>Error!</h1>
+</div>
+<div class="testbox">
+    <form action="/predicterror" method="POST">
+        <div class="btn-block">
+            <p>Either the form was not complete or faulty input was given</p>
+            <button type="submit" href="/predict">Return to predict </button>
+        </div>
+    </form>   
+</div>
+
+{% endblock %}

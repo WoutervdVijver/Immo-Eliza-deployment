@@ -1,0 +1,22 @@
+{% extends 'book_base.html' %}
+
+<!-- {% block head%}
+<title>Prediction</title>
+{% endblock %} -->
+
+{% block body%}
+
+<div class="banner">
+    <h1>Welcome!</h1>
+</div>
+<div class="testbox">
+    <form action="/" method="POST">
+        <div class="btn-block">
+            <p>Predict the value of your house</p>
+            <button type="submit" href="/predict">Predict </button>
+        </div>
+    </form>   
+</div>
+
+
+{% endblock %}

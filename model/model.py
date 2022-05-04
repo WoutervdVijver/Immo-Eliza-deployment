@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 
-from sklearn.linear_model import LinearRegression
-
 
 
 
@@ -25,5 +23,5 @@ class ModelBuilder:
         self.model = model
 
     def predict(self, X:dict):
-        return np.round(self.model.predict(pd.DataFrame(X)),2)
+        return np.round(np.exp(self.model.predict(pd.DataFrame(X))),2)
 
