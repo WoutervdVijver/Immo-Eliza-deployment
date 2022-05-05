@@ -13,9 +13,11 @@ A Dockerfile is present so after downloading on a local machine, a Docker contai
 
 If you not familar with Docker, check if the right packages installed in the requirement.txt. Then run app.py.
 
-Open a webbrowser to [http://localhost:5000](http://localhost:5000)
 ## Usage
+
+Open a webbrowser to [http://localhost:5000](http://localhost:5000). The homepage will load.
 
 ## Visuals
    
- 
+ ![alt text](img/Visual.png "Logo Title Text 1")
+
