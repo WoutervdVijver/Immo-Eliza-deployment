@@ -102,7 +102,9 @@ class Preprocess:
 
     def clean_log(self, col: str) -> float:
         '''
-        Function that returns the natural log of the 'living area'
+        Function that returns the natural log of the col that has been entered
+
+        :param col: str that represent the column in the dataframe that needs to be transformed
         '''
         value = float(self.obj[col])
         if value>0:
@@ -117,21 +119,11 @@ class Preprocess:
         value = float(self.obj['Number of bedrooms'])
         return  value
 
-    def clean_subtype(self):
-        '''
-        Function that updates one of the columns in the self.dict depending on the 'Property subtype'
-        '''
-        value = self.obj['Property subtype']
-        if value in subtypes:
-            self.dict[value] = 1
-        elif value == 'UNKNOWN':
-            pass
-        else:
-            raise ValueError()
-
     def clean_bool(self, col:str) -> int:
         '''
-        Function that updates the pool in the self.dict
+        Function that retrieves the wether a certain type is present in col and sets the related value in self.dict to 1.
+
+        :param col: str that represent the column in the dataframe that needs to be transformed
         '''
         value = int(self.obj[col])
         if value == 1:
@@ -139,7 +131,7 @@ class Preprocess:
         
     def clean_location(self):
         '''
-        Function that retrieves the name of the location and return the latitude and longitude 
+        Function that returns the latitude and longitude from the location
         '''
         value = self.obj['Location']
         geolocator = Nominatim(user_agent="my_app")
