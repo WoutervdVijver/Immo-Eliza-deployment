@@ -1,0 +1,28 @@
+{% extends 'book_base.html' %}
+
+<!-- {% block head%}
+<title>Prediction</title>
+{% endblock %} -->
+
+{% block body%}
+
+<div class="banner">
+    <h1>Update the model</h1>
+</div>
+<div class="testbox">
+    <!-- <form action="/" method="POST">
+        <div class="btn-block">
+            <p>Add a new house to the dataset</p>
+            <button type="submit" value="form" name="button" href="/predict">Predict </button>
+        </div>
+    </form>  -->
+    <form action="/" method="GET">
+        <div class="btn-block">
+            <p>Retrain the model</p>
+            <button type="submit" value="train" name="button" href="/">Train </button>
+        </div>
+    </form>   
+</div>
+
+
+{% endblock %}
