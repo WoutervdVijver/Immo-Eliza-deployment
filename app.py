@@ -1,9 +1,9 @@
-from flask import Flask, redirect, request, render_template, url_for, jsonify
+from flask import Flask, redirect, request, render_template, url_for
 import joblib
 import os
 
 from model.model import ModelBuilder, ModelCreator
-from preprocessing.cleaning_data import Preprocess
+from preprocessing.cleaning_data import Preprocess, PreprocessWithPrice
 
 app = Flask(__name__)
 
@@ -49,7 +49,7 @@ def prediction():
     Function that creates a website to display the prediction.
     """
     if request.method == "GET":
-        return render_template("prediction.html", prediction=[7])
+        return render_template("prediction.html", prediction=[300000])
     else:
         if request.form["button"] == "predict":
             return redirect("/predict")
@@ -71,17 +71,35 @@ def error():
 @app.route("/update", methods=["GET", "POST"])
 def update():
     """
-    Function creates website where the model can be retrained
+    Function creates webpage where the model can be retrained
     """
     if request.method == "GET":
         return render_template("update.html")
     else:
         if request.form["button"] == "form":
-            return render_template("predict.html")
+            return redirect("/extradata")
         else:
             creator = ModelCreator()
             creator.train()
-            return redirect("/index")
+            return render_template("index.html")
+
+
+@app.route("/extradata", methods=["GET", "POST"])
+def get_data():
+    """
+    Function that creates a webpage that displays a form to add data to a database.
+    """
+    if request.method == "GET":
+        return render_template("updateform.html")
+    else:
+        try:
+            data = request.form
+            prep = PreprocessWithPrice(data)
+            prep.clean_all_with_price()
+            ### HERE COMES CODE THAT INPUTS THE DATA INTO A DATABASE
+            return redirect("/")
+        except:
+            return redirect("/")
 
 
 if __name__ == "__main__":
@@ -90,4 +108,4 @@ if __name__ == "__main__":
     # Threaded option to enable multiple instances for
     # multiple user access support
     # You will also define the host to "0.0.0.0" because localhost will only be reachable from inside de server.
-    app.run(host="0.0.0.0", threaded=True, port=port)
+    app.run(debug=True, host="0.0.0.0", threaded=True, port=port)

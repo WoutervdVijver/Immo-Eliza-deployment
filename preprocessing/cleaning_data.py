@@ -140,5 +140,22 @@ class Preprocess:
         value = self.obj[col]
         if value in subtypes + kitchen_types + condition_types:
             self.dict[value] = 1
+
+
+class PreprocessWithPrice(Preprocess):
+    def __init__(self, obj):
+        super().__init__(obj)
+        self.dict["Price"] = 0.0
+        self.dict["Price_log"] = 0.0
+
+    def clean_all_with_price(self):
+        super().clean_all()
+        self.clean_price()
+
+    def clean_price(self):
+        value = float(self.obj["Price"])
+        if value > 0:
+            self.dict["Price"] = value
+            self.dict["Price_log"] = np.log(value)
         else:
             raise ValueError()

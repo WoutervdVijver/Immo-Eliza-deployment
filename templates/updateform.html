@@ -1,8 +1,11 @@
 {% extends 'book_base.html' %}
 
+
+
 {% block body%}
+
 <div class="testbox">
-  <form action="/predict" method="POST">
+  <form action="/extradata" method="POST">
     <div class="banner">
       <h1>Your house</h1>
     </div>
@@ -44,8 +47,8 @@
         <option value="GOOD">Good</option>
         <option value="JUST_RENOVATED">Just renovated</option>
         <option value="TO_RENOVATE">To renovate</option>
-        <option value="TO_RESTORE">To restore</option>
-        <option value="HYPER_EQUIPPED">Hyper equipped</option>
+        <option value="=TO_RESTORE">To restore</option>
+        <option value="HYPER_EQUIPED">Hyper equipped</option>
         <option value="UNKNOWN"> Unknown </option>
       </select>
     </div>
@@ -60,10 +63,10 @@
       <select name="Kitchen" required>
         <option value="INSTALLED">Installed</option>
         <option value="NOT_INSTALLED">Not installed</option>
-        <option value="SEMI_EQUIPPED">Semi-equipped</option>
-        <option value="USA_HYPER_EQUIPPED">USA hyper-equipped</option>
+        <option value="SEMI_EQUIPED">Semi-equiped</option>
+        <option value="USA_HYPER_EQUIPED">USA hyper-equiped</option>
         <option value="USA_INSTALLED">USA installed</option>
-        <option value="USA_SEMI_EQUIPPED">USA semi-equipped</option>
+        <option value="USA_SEMI_INSTALLED">USA semi-installed</option>
         <option value="USA_UNINSTALLED">USA uninstalled</option>
         <option value="UNKNOWN"> Unknown </option>
       </select>
@@ -138,12 +141,18 @@
         <label for="radio_2" class="radio"><span>No</span></label>
       </div>
     </div>
+    <div class="item">
+      <p>Price</p>
+      <div class="name-item">
+        <input type="float" name="Price" placeholder="0" />
+      </div>
+    </div>
 
     <div class="btn-block">
       <button type="submit">Submit</button>
     </div>
   </form>
 </div>
-{% block prediction %}{% endblock %}
+
 
 {% endblock %}
