@@ -15,7 +15,9 @@ If you not familar with Docker, check if the right packages installed in the req
 
 ## Usage
 
-Open a webbrowser to [http://localhost:5000](http://localhost:5000). The homepage will load.
+Open a webbrowser to [http://localhost:5000](http://localhost:5000). The homepage will welcome you and you will find two buttons. The first one leads to a form where you can enter the details of a house. The site will calculate a prediction for you.
+
+The second button leads to a page where you can update the dataset or the model. The updating of a database is not functional yet and the site won't do anything with the data entered here. It does retrain the model but on the same dataset.
 
 ## Visuals
    
